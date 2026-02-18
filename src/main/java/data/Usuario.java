@@ -23,14 +23,17 @@ public class Usuario {
     public int fnc_mostrarUsuario () {
         // Interfaz de consola
         System.out.println("==============================LECTURA DATOS USUARIO==============================");
-        return db.fnc_mostrarTabla("USUARIOS");
+        return db.fnc_sqlMostrarTabla("USUARIOS");
     }
 
     public int fnc_actualizarUsuario () {
+        System.out.println("==============================ACTUALIZAR DATOS DE USUARIO==============================");
         return -1;
     }
 
     public int fnc_desactivarUsuario () {
-        return -1;
+        System.out.println("==============================DESACTIVAR USUARIO==============================");
+        System.out.println("Ingrese el id de usuario que desea desactivar: "); int id = read.nextInt();
+        return db.fnc_sqlDesactivarUsuario(id);
     }
 }
