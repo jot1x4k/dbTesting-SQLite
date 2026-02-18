@@ -1,47 +1,36 @@
 package data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Scanner;
 
 public class Usuario {
-    // CRUD Usuario: Registrar usuario en la base de datos
-    public int fnc_sqlInsertarUsuario (
-            String prm_usuario,
-            String prm_clave,
-            String prm_nombre,
-            String prm_rol
-    )
-    {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-            Statement statement = connection.createStatement();
+    Scanner read = new Scanner(System.in);
+    Data db = new Data();
 
-            String sql = "INSERT INTO USUARIOS (USU_USER, USU_CLAVE, USU_NOMBRECOMPLETO, USU_ROL) " +
-                    "VALUES ('" + prm_usuario + "', '" + prm_clave + "', '" + prm_nombre + "', '" +prm_rol + "')";
+    public int fnc_registrarUsuario () {
+        String usuario, clave, nombre, rol;
 
-            try (Statement pstmt = connection.createStatement()) {
-                pstmt.executeUpdate(sql);
-                System.out.println("Usuario registrado con exito");
+        // Interfaz de consola
+        System.out.println("==============================REGISTRO USUARIO==============================");
+        System.out.println("Ingrese el usuario de acceso: ");                   usuario = read.nextLine();
+        System.out.println("Ingrese la clave: ");                               clave = read.nextLine();
+        System.out.println("Ingrese su nombre completo: ");                     nombre = read.nextLine();
+        System.out.println("Ingrese su rol: [MEDICO], [AGENDADOR], [ROL]");     rol = read.nextLine();
+        System.out.println("============================================================================");
 
-                // +-- testing
-                System.out.println("Query final: " + sql);
-                // --+
-                return 1;
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
+        return db.fnc_sqlInsertarUsuario(usuario, clave, nombre, rol);
+    }
 
-                // +-- testing
-                System.out.println("Query final: " + sql);
-                // --+
-                return 0;
-            }
+    public int fnc_mostrarUsuario () {
+        // Interfaz de consola
+        System.out.println("==============================LECTURA DATOS USUARIO==============================");
+        return db.fnc_mostrarTabla("USUARIOS");
+    }
 
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace(System.err);
-            return 0;
-        }
+    public int fnc_actualizarUsuario () {
+        return -1;
+    }
+
+    public int fnc_desactivarUsuario () {
+        return -1;
     }
 }
