@@ -12,7 +12,7 @@ import java.sql.Statement;
 public class Main {
     public static void main(String[] args)
       {
-        Main program =new Main();
+        Main program = new Main();
         program.fnc_registrarUsuarios(10);
       }
 
