@@ -11,7 +11,7 @@ public class UserConsoleUI {
         this.userRepository = userRepository;
     }
 
-    public void start() {
+    public void menu() {
         int option;
         do {
             System.out.println("\n=== GESTIÓN DE USUARIOS (SOLID) ===");
@@ -41,11 +41,11 @@ public class UserConsoleUI {
         System.out.print("Nombre Completo: "); user.setFullName(scanner.nextLine());
         System.out.print("Rol [MEDICO/AGENDADOR/ADMIN]: "); user.setRole(scanner.nextLine());
 
-        userRepository.save(user);
+        userRepository.create(user);
     }
 
     private void listUsers() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.read();
         System.out.println("ID\t\tUSER\t\tNOMBRE\t\t\tROL\t\tESTADO");
         System.out.println("----------------------------------------------------------------");
         for (User u : users) {

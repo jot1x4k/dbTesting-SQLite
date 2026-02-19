@@ -9,7 +9,7 @@ public class Main {
         IUserRepository repository = new SqliteUserRepository();
         UserConsoleUI ui = new UserConsoleUI(repository);
 
-        ui.start();
+        ui.menu();
     }
 }
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SqliteUserRepository implements IUserRepository {
     @Override
-    public void save(User user) {
+    public void create(User user) {
         String sql = "INSERT INTO USUARIOS (USU_USER, USU_CLAVE, USU_NOMBRECOMPLETO, USU_ROL, USU_ESTADO) VALUES (?, ?, ?, ?, '1')";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -16,7 +16,7 @@ public class SqliteUserRepository implements IUserRepository {
             pstmt.setString(3, user.getFullName());
             pstmt.setString(4, user.getRole());
             pstmt.executeUpdate();
-            System.out.println(">> Usuario registrado con éxito.");
+            System.out.println(">> Usuario registrado con exito.");
 
         } catch (SQLException e) {
             System.err.println("Error al guardar: " + e.getMessage());
@@ -24,7 +24,7 @@ public class SqliteUserRepository implements IUserRepository {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> read() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM USUARIOS ORDER BY USU_ID DESC";
 
@@ -56,9 +56,9 @@ public class SqliteUserRepository implements IUserRepository {
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println(">> Usuario actualizado con éxito.");
+                System.out.println(">> Usuario actualizado con exito.");
             } else {
-                System.out.println(">> No se encontró el usuario con ID: " + user.getId());
+                System.out.println(">> No se encontro el usuario con ID: " + user.getId());
             }
 
         } catch (SQLException e) {
@@ -99,7 +99,6 @@ public class SqliteUserRepository implements IUserRepository {
         return null;
     }
 
-    // Helper para no repetir código (DRY)
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         return new User(
                 rs.getInt("USU_ID"),
