@@ -1,0 +1,33 @@
+@startuml Context
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Diagrama de Contexto - Piedra Azul
+
+' =====================================================
+' USUARIOS DEL SISTEMA
+' =====================================================
+
+Person(paciente, "Paciente", "Usuario que solicita y consulta citas médicas y revisa su historial clinico")
+
+Person(admin, "Administrador", "Usuario responsable de gestionar usuarios, auditorias y configuraciones del sistema")
+
+Person(medico, "Medico/Terapista", "Profesional de salud que gestiona citas medicas y registra información clinica")
+
+' =====================================================
+' SISTEMA PRINCIPAL
+' =====================================================
+
+System(aplicacion, "Piedra Azul", "Aplicacion de escritorio desarrollada en Java que permite la gestion de citas medicas e historiales clinicos")
+
+' =====================================================
+' RELACIONES
+' =====================================================
+
+Rel(paciente, aplicacion, "Solicita y consulta citas medicas", "Interfaz grafica (JFrame)")
+
+Rel(admin, aplicacion, "Administra usuarios y configuraciones", "Interfaz grafica (JFrame)")
+
+Rel(medico, aplicacion, "Registra informacion clínica y gestiona citas", "Interfaz grafica (JFrame)")
+
+@enduml
